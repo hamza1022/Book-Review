@@ -153,7 +153,7 @@ router.put("/update/:bookId", auth.required, async (req, res, next) => {
   }
 });
 
-router.get("/search", async (req, res, next) => {
+router.get("/search", auth.required, async (req, res, next) => {
   const searchQuery = req.query.q;
 
   console.log("search query: " + searchQuery);
