@@ -75,7 +75,7 @@ module.exports = (app) => {
   require("./models/User");
   require("./models/Book");
 
-  // require("./utilities/passport");
+  require("./utilities/passport");
   app.use(passport.initialize());
 
   app.use(require("./routes"));

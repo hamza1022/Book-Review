@@ -25,6 +25,15 @@ router.post("/login", (req, res, next) => {
   })(req, res, next);
 });
 
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local", { session: false }, function (err, user, info) {
+    if (err) return next(new BadRequestResponse(err.message));
+    if (!user) return next(new BadRequestResponse("Invalid email or password!", 423));
+
+    return next(new OkResponse({ user: user.toAuthJSON() }));
+  })(req, res, next);
+});
+
 router.post("/signup", (req, res, next) => {
   User.findOne({ email: req.body.email }, (err, res) => {
     if (err) return next(new BadRequestResponse(err));
