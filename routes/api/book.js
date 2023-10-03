@@ -18,7 +18,7 @@ router.get("/getBook", async (req, res, next) => {
     const query = {};
 
     if (author) {
-      query.Author = new RegExp(author, "i");
+      query.author = new RegExp(author, "i");
     }
     if (title) {
       query.Title = new RegExp(title, "i");
@@ -31,18 +31,7 @@ router.get("/getBook", async (req, res, next) => {
     }
 
     const books = await Book.find(query);
-    return res.json(new OkResponse(books));
-
-    // const { query } = req.params;
-
-    // console.log("Query", query);
-
-    // const regex = new RegExp(query, "i");
-
-    // const books = await Book.find({
-    //   $or: [{ ISBN: regex }, { title: regex }, { author: regex }, { review: regex }],
-    // });
-    // return next(new OkResponse(books));
+    return next(new OkResponse(books));
   } catch (err) {
     return next(new BadRequestResponse(err));
   }

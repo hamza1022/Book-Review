@@ -11,8 +11,6 @@ let UserSchema = new mongoose.Schema(
     name: { type: String },
     hash: { type: String, default: null },
     salt: String,
-    resetPasswordToken: { type: String, default: null },
-    mailToken: { type: String, default: null },
   },
   { timestamps: true }
 );
@@ -56,11 +54,6 @@ UserSchema.methods.generateJWT = function () {
     secret
   );
 };
-
-UserSchema.pre("validate", function (next) {
-  if (this.socialLinks.length <= 0) this.socialLinks = socialLinks;
-  next();
-});
 
 const autoPopulate = function (next) {
   next();
