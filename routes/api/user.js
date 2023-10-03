@@ -20,14 +20,6 @@ router.param("email", (req, res, next, email) => {
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", { session: false }, function (err, user, info) {
     if (err) return next(new BadRequestResponse(err.message));
-    if (!user) return next(new BadRequestResponse(info.error, 423));
-    return next(new OkResponse({ user: user.toAuthJSON() }));
-  })(req, res, next);
-});
-
-router.post("/login", (req, res, next) => {
-  passport.authenticate("local", { session: false }, function (err, user, info) {
-    if (err) return next(new BadRequestResponse(err.message));
     if (!user) return next(new BadRequestResponse("Invalid email or password!", 423));
 
     return next(new OkResponse({ user: user.toAuthJSON() }));

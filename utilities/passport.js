@@ -3,8 +3,6 @@ let mongoose = require("mongoose");
 let User = mongoose.model("User");
 let LocalStrategy = require("passport-local").Strategy;
 
-const { backend, GoogleClientSecret, GoogleClientID, FacebookClientSecret, FacebookClientID, AppleKeyID, AppleClientID, AppleTeamID, LinkedInSecret, LinkedInKey } = require("../config");
-
 passport.use(
   new LocalStrategy(
     {
